@@ -1,4 +1,5 @@
-﻿using BowlingScoreboard.ViewModels;
+﻿using BowlingScoreboard.Models;
+using BowlingScoreboard.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,11 +15,19 @@ namespace BowlingScoreboard
     /// </summary>
     public partial class App : Application
     {
+        private readonly Game _game;
+
+        public App()
+        {
+            _game = new Game();
+            Console.WriteLine(_game.ToString());
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             MainWindow = new ScoreboardWindow()
             {
-                DataContext = new ScoreboardViewModel()
+                DataContext = new ScoreboardViewModel(_game)
             };
 
             MainWindow.Show();

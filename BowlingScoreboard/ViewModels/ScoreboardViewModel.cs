@@ -1,4 +1,5 @@
-﻿using BowlingScoreboard.Models;
+﻿using BowlingScoreboard.Commands;
+using BowlingScoreboard.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,14 +15,23 @@ namespace BowlingScoreboard.ViewModels
         private readonly ObservableCollection<FrameViewModel> _frames;
         public IEnumerable<FrameViewModel> Frames => _frames;
         public ICommand ResetCommand { get; }
+        public Game Game { get; private set; }
 
-        public ScoreboardViewModel()
+        public string Foo { get; set; } // TODO: remove
+
+        public ScoreboardViewModel(Game game)
         {
+            Game = game;
+
+            Foo = "foo"; // TODO: remove
+
             _frames = new ObservableCollection<FrameViewModel>();
 
-            _frames.Add(new FrameViewModel(new Frame(5)));
-            _frames.Add(new FrameViewModel(new Frame(4)));
-            _frames.Add(new FrameViewModel(new Frame(3)));
+            _frames.Add(new FrameViewModel(new Frame()));
+            _frames.Add(new FrameViewModel(new Frame()));
+            _frames.Add(new FrameViewModel(new Frame()));
+
+            ResetCommand = new ResetCommand(this, game);
         }
     }
 }

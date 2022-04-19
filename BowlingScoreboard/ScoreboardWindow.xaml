@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Bowling Scoreboard" Height="450" Width="800">
     <StackPanel Orientation="Vertical" Margin="25">
-        <ListView ItemsSource="{Binding Frames}">
+        <ListView ItemsSource="{Binding Frames}" >
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed" />
@@ -18,13 +18,20 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Score}" />
+                                <ItemsControl ItemsSource="{Binding Throws}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding UpdateSourceTrigger=PropertyChanged}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
+        <TextBox Text="{Binding Foo}"/>
         <Button Command="{Binding ResetCommand}" Content="Reset" Padding="10,5" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
     </StackPanel>
 </Window>

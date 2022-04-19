@@ -21,14 +21,9 @@ namespace BowlingScoreboard
     /// </summary>
     public partial class ScoreboardWindow : Window
     {
-        private Game game;
-
         public ScoreboardWindow()
         {
             InitializeComponent();
-            //game = new Game(new List<string> { "Dave", "Mary", "Paul", "Zebulon" });
-            game = new Game();
-            Console.WriteLine(game.ToString());
         }
     }
 }

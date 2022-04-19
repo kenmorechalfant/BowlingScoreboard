@@ -30,10 +30,9 @@ namespace BowlingScoreboard.Models
 
         public List<int> Throws { get; private set; }
 
-        public Frame(int p = 0)
+        public Frame()
         {
             pinsRemaining = pinCount;
-            pinsRemaining -= p;
         }
 
         public string Score {
