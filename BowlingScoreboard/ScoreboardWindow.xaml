@@ -5,33 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BowlingScoreboard" xmlns:views="clr-namespace:BowlingScoreboard.Views"
         mc:Ignorable="d"
-        Title="Bowling Scoreboard" Height="450" Width="800">
-    <StackPanel Orientation="Vertical" Margin="25">
-        <ListView ItemsSource="{Binding Frames}" >
-            <ListView.Resources>
-                <Style TargetType="GridViewColumnHeader">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                </Style>
-            </ListView.Resources>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
+        Title="Bowling Scoreboard" Height="600" Width="800">
+    <StackPanel Orientation="Vertical" Margin="25" VerticalAlignment="Stretch">
+        <ItemsControl ItemsSource="{Binding Frames}" VerticalAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl ItemsSource="{Binding Throws}">
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <ItemsControl ItemsSource="{Binding Throws}">
-                                    <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding UpdateSourceTrigger=PropertyChanged}"/>
-                                        </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                <TextBox Text="{Binding Result}"/>
                             </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBox Text="{Binding Foo}"/>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <TextBox Text="{Binding Path=Foo}"/>
         <Button Command="{Binding ResetCommand}" Content="Reset" Padding="10,5" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
     </StackPanel>
 </Window>

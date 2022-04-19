@@ -10,19 +10,39 @@ namespace BowlingScoreboard.Models
     {
         private int frameCount = 10;
         public int CurrentFrame { get; private set; }
-        private List<Frame> frames;
+
+        private List<Frame> _frames;
+        public IEnumerable<Frame> Frames {
+            get { return _frames; }
+            private set
+            {
+                _frames = (List<Frame>)value;
+            }
+        }
+
 
         public Game()
         {
             CurrentFrame = 0;
-            frames = new List<Frame>();
+            _frames = new List<Frame>();
 
             for (int i = 0; i < frameCount; i++)
             {
-                frames.Add(new Frame());
+                _frames.Add(new Frame());
+            }
+
+            Console.WriteLine($"Frame Count: {_frames.Count}");
+        }
+
+        public void Reset()
+        {
+            foreach (Frame frame in _frames)
+            {
+                frame.Reset();
             }
         }
 
+        
         public override string ToString()
         {
             return "Game - frameCount: " + frameCount.ToString();

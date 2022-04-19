@@ -22,40 +22,48 @@ namespace BowlingScoreboard.Models
     }
     internal class Frame
     {
-        protected int maxThrowCount = 2;
-        private int currentThrow = 1;
+        protected int maxThrowCount;
         protected int pinCount = 10;
         private int pinsRemaining;
-        private bool bResolved;
 
-        public List<int> Throws { get; private set; }
-
-        public Frame()
+        private List<ThrowAttempt> _throws;
+        public IEnumerable<ThrowAttempt> Throws
         {
-            pinsRemaining = pinCount;
-        }
-
-        public string Score {
-            get { return Convert.ToString(pinCount - pinsRemaining); }
-        }
-
-        // returns true if the Frame is over
-        public bool AddResult(int result)
-        {
-            if (bResolved) throw new AddToResolvedFrameException("Cannot add a result to a completed frame.");
-
-            Throws.Add(result);
-            pinsRemaining -= result;
-
-            currentThrow++;
-
-            if (currentThrow == maxThrowCount)
+            get { return _throws; }
+            private set
             {
-                bResolved = true;
-                return true;
+                _throws = (List<ThrowAttempt>)value;
+            }
+        }
+
+        public Frame(int throwCount = 2)
+        {
+            if (throwCount != 2 && throwCount != 3) throw new Exception("A frame can only have 2 or 3 throws.");
+
+            maxThrowCount = throwCount;
+            pinsRemaining = pinCount;
+
+            _throws = new List<ThrowAttempt>();
+
+            for (int i = 0; i < maxThrowCount; i++)
+            {
+                _throws.Add(new ThrowAttempt());
             }
 
-            return false;
+            Console.WriteLine($"Throw Count: {_throws.Count}");
+        }
+        public void Reset()
+        {
+            foreach (ThrowAttempt throwAttempt in _throws)
+            {
+                throwAttempt.Reset();
+            }
+        }
+
+
+        public string Score {
+            //get { return Throws.Aggregate(0, (acc, x) => acc + x.HitCount); }
+            get { return ""; } // TODO
         }
     }
 }

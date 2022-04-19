@@ -10,7 +10,7 @@
         <ItemsControl ItemsSource="{Binding Throws}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}"/>
+                    <TextBlock Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

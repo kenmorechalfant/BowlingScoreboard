@@ -17,19 +17,31 @@ namespace BowlingScoreboard.ViewModels
         public ICommand ResetCommand { get; }
         public Game Game { get; private set; }
 
-        public string Foo { get; set; } // TODO: remove
+        private string _foo;
+        public string Foo {
+            get { return _foo; }
+            set
+            {
+                if (value != _foo)
+                {
+                    _foo = value;
+                    OnPropertyChanged(nameof(ScoreboardViewModel.Foo));
+                }
+            }
+        } // TODO: remove
 
         public ScoreboardViewModel(Game game)
         {
             Game = game;
 
-            Foo = "foo"; // TODO: remove
+            Foo = "foo"; // TODO: remove this, testing ResetCommand
 
             _frames = new ObservableCollection<FrameViewModel>();
 
-            _frames.Add(new FrameViewModel(new Frame()));
-            _frames.Add(new FrameViewModel(new Frame()));
-            _frames.Add(new FrameViewModel(new Frame()));
+            foreach (Frame frame in Game.Frames)
+            {
+                _frames.Add(new FrameViewModel(frame));
+            }
 
             ResetCommand = new ResetCommand(this, game);
         }

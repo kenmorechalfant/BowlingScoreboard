@@ -11,16 +11,19 @@ namespace BowlingScoreboard.ViewModels
     internal class FrameViewModel : ViewModelBase
     {
         private readonly Frame _frame;
-        private readonly ObservableCollection<string> _throws;
-        public IEnumerable<string> Throws => _throws;
+        private readonly ObservableCollection<ThrowAttemptViewModel> _throws;
+        public IEnumerable<ThrowAttemptViewModel> Throws => _throws;
 
         public FrameViewModel(Frame frame)
         {
-            _throws = new ObservableCollection<string>();
             _frame = frame;
 
-            _throws.Add("");
-            _throws.Add("7");
+            _throws = new ObservableCollection<ThrowAttemptViewModel>();
+
+            foreach (ThrowAttempt throwAttempt in frame.Throws)
+            {
+                _throws.Add(new ThrowAttemptViewModel(throwAttempt));
+            }
         }
     }
 }

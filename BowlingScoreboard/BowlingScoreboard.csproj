@@ -57,8 +57,10 @@
     </ApplicationDefinition>
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\ResetCommand.cs" />
+    <Compile Include="Models\ThrowAttempt.cs" />
     <Compile Include="ViewModels\FrameViewModel.cs" />
     <Compile Include="ViewModels\ScoreboardViewModel.cs" />
+    <Compile Include="ViewModels\ThrowAttemptViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\FrameView.xaml.cs">
       <DependentUpon>FrameView.xaml</DependentUpon>

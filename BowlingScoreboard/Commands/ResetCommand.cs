@@ -22,8 +22,8 @@ namespace BowlingScoreboard.Commands
 
         public override void Execute(object parameter)
         {
-            _scoreboardViewModel.Foo = "reset";
-            MessageBox.Show("Reset", "Info");
+            MessageBox.Show("Reset Complete");
+            _game?.Reset();
         }
     }
 }
