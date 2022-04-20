@@ -20,7 +20,6 @@ namespace BowlingScoreboard.Models
             }
         }
 
-
         public Game()
         {
             CurrentFrame = 0;
